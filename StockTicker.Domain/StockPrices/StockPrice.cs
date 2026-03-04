@@ -1,4 +1,7 @@
-﻿namespace StockTicker.Domain.StockPrices
+﻿using StockTicker.Domain.Abstractions;
+using StockTicker.Domain.StockPrices.Events;
+
+namespace StockTicker.Domain.StockPrices
 {
     public sealed class StockPrice : Entity
     {
@@ -21,7 +24,7 @@
         {
             var stockPrice = new StockPrice(ticker, price, timestamp);
 
-            stockPrice.RaiseDomainEvent(new StockPriceCreatedDOmainEvent);
+            stockPrice.RaiseDomainEvent(new StockPriceCreatedDomainEvent(stockPrice.Id));
 
             return stockPrice;
         }
