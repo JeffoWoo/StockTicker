@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="StockTicker.Domain/StockTicker.Domain.csproj" Id="53731306-2a7e-49d8-b187-b0db867dda48" />
+  </Folder>
+  <Folder Name="/test/" />
+</Solution>
