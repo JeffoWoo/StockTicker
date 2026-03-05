@@ -24,7 +24,11 @@ namespace StockTicker.Domain.StockPrices
         {
             var stockPrice = new StockPrice(ticker, price, timestamp);
 
-            stockPrice.RaiseDomainEvent(new StockPriceCreatedDomainEvent(stockPrice.Id));
+            stockPrice.RaiseDomainEvent(new StockPriceCreatedDomainEvent(
+                stockPrice.Id,
+                ticker, 
+                price, 
+                timestamp));
 
             return stockPrice;
         }

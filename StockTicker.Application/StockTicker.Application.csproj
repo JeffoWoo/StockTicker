@@ -14,4 +14,9 @@
     <InternalsVisibleTo Include="StockTicker.Application.UnitTests" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.72" />
+    <PackageReference Include="MediatR" Version="14.1.0" />
+  </ItemGroup>
+
 </Project>
