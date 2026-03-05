@@ -10,12 +10,12 @@ namespace StockTicker.Domain.UnitTests.StockPrices
 
         public static StockPrice Create()
         {
-            return StockPrice.Create(StockPriceData.Ticker, StockPriceData.Price, StockPriceData.Timestamp);
+            return StockPrice.Create(StockPriceData.Ticker, StockPriceData.Price, StockPriceData.Timestamp).Value;
         }
 
         public static StockPrice Create(DateTime timeStamp)
         {
-            return StockPrice.Create(StockPriceData.Ticker, StockPriceData.Price, timeStamp);
+            return StockPrice.Create(StockPriceData.Ticker, StockPriceData.Price, timeStamp).Value;
         }
     }
 }
