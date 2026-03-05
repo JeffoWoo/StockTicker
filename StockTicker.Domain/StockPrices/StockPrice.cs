@@ -17,7 +17,7 @@
         public decimal Price { get; private set; }
         public DateTime Timestamp { get; private set; }
 
-        public static StockPrice Create(string ticker, decimal price, DateTime timestamp)
+        public static Result<StockPrice> Create(string ticker, decimal price, DateTime timestamp)
         {
             var stockPrice = new StockPrice(ticker, price, timestamp);
 
