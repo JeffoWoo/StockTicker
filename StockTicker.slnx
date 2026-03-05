@@ -1,8 +1,11 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="StockTicker.Application/StockTicker.Application.csproj" Id="93d270c3-67fa-4f6f-8a63-3e0794456e89" />
     <Project Path="StockTicker.Domain/StockTicker.Domain.csproj" Id="53731306-2a7e-49d8-b187-b0db867dda48" />
   </Folder>
   <Folder Name="/test/">
+    <Project Path="StockTicker.Application.UnitTests/StockTicker.Application.UnitTests.csproj" Id="99f73b57-67d3-4389-a3f6-de541f2a8a86" />
+    <Project Path="StockTicker.ArchitectureTests/StockTicker.ArchitectureTests.csproj" Id="76b63c29-8a33-482f-9c82-bfab0b178890" />
     <Project Path="StockTicker.Domain.UnitTests/StockTicker.Domain.UnitTests.csproj" Id="7d450ce2-5785-4ce1-8419-8247716e6f1d" />
   </Folder>
 </Solution>
