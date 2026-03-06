@@ -16,6 +16,9 @@ namespace StockTicker.Domain.UnitTests.StockPrices
             var domainEvent = AssertDomainEventWasPublished<StockPriceCreatedDomainEvent>(stockPrice);
             domainEvent.Should().NotBeNull();
             domainEvent.StockPriceId.Should().Be(stockPrice.Id);
+            domainEvent.Symbol.Should().Be(stockPrice.Ticker);
+            domainEvent.Price.Should().Be(stockPrice.Price);
+            domainEvent.CreatedAtUtc.Should().Be(stockPrice.Timestamp);
         }
     }
 }

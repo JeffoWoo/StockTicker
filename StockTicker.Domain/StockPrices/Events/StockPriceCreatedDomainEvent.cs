@@ -2,7 +2,11 @@
 
 namespace StockTicker.Domain.StockPrices.Events
 {
-    public sealed record StockPriceCreatedDomainEvent(Guid StockPriceId) : IDomainEvent
+    public sealed record StockPriceCreatedDomainEvent(
+        Guid StockPriceId, 
+        string Symbol, 
+        decimal Price, 
+        DateTime CreatedAtUtc) : IDomainEvent
     {
     }
 }
