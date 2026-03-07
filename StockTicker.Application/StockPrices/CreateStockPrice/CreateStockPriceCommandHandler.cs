@@ -7,11 +7,11 @@ namespace StockTicker.Application.StockPrices.CreateStockPrice
 {
     internal sealed class CreateStockPriceCommandHandler : ICommandHandler<CreateStockPriceCommand, Guid>
     {
-        private readonly IStockPriceRepository _stockPriceRepository;
+        private readonly IStockPriceWriteRepository _stockPriceRepository;
         private readonly IUnitOfWork _unitOfWork;
 
         public CreateStockPriceCommandHandler(
-            IStockPriceRepository stockPriceRepository,
+            IStockPriceWriteRepository stockPriceRepository,
             IUnitOfWork unitOfWork)
         {
             _stockPriceRepository = stockPriceRepository;

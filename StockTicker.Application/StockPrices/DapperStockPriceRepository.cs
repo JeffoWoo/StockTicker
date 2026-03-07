@@ -1,6 +1,6 @@
 ﻿using Dapper;
 using StockTicker.Application.Abstractions.Data;
-using StockTicker.Application.StockPrices.GetStockPrice;
+using StockTicker.Domain.StockPrices;
 
 namespace StockTicker.Application.StockPrices
 {
@@ -11,7 +11,7 @@ namespace StockTicker.Application.StockPrices
         public DapperStockPriceRepository(ISqlConnectionFactory sqlConnectionFactory) =>
             _sqlConnectionFactory = sqlConnectionFactory;
 
-        public async Task<StockPriceResponse?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        public async Task<StockPrice?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
             using var connection = _sqlConnectionFactory.CreateConnection();
 
@@ -25,7 +25,7 @@ namespace StockTicker.Application.StockPrices
             WHERE id = @StockPriceId
             """;
 
-            return await connection.QueryFirstOrDefaultAsync<StockPriceResponse>(
+            return await connection.QueryFirstOrDefaultAsync<StockPrice>(
                 sql,
                 new { StockPriceId = id });
         }

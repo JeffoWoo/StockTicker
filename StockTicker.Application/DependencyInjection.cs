@@ -2,6 +2,7 @@
 using StockTicker.Application.Abstractions.Messaging;
 using StockTicker.Application.StockPrices;
 using StockTicker.Application.StockPrices.GetStockPrice;
+using StockTicker.Domain.StockPrices;
 
 namespace StockTicker.Application
 {
@@ -18,7 +19,7 @@ namespace StockTicker.Application
             services.AddScoped<IStockPriceQueryRepository, DapperStockPriceRepository>();
 
             // Handlers
-            services.AddTransient<IQueryHandler<GetStockPriceQuery, StockPriceResponse>, GetStockPriceQueryHandler>();
+            services.AddTransient<IQueryHandler<GetStockPriceQuery, StockPrice>, GetStockPriceQueryHandler>();
 
             return services;
         }

@@ -17,13 +17,13 @@ namespace StockTicker.Application.UnitTests.StockPrices
             UtcNow);
 
         private readonly CreateStockPriceCommandHandler _handler;
-        private readonly IStockPriceRepository _stockPriceRepositoryMock;
+        private readonly IStockPriceWriteRepository _stockPriceRepositoryMock;
         private readonly IUnitOfWork _unitOfWorkMock;
         private readonly IDateTimeProvider _dateTimeProviderMock;
 
         public CreateStockPriceTests()
         {
-            _stockPriceRepositoryMock = Substitute.For<IStockPriceRepository>();
+            _stockPriceRepositoryMock = Substitute.For<IStockPriceWriteRepository>();
             _unitOfWorkMock = Substitute.For<IUnitOfWork>();
             _dateTimeProviderMock = Substitute.For<IDateTimeProvider>();
             _dateTimeProviderMock.UtcNow.Returns(UtcNow);

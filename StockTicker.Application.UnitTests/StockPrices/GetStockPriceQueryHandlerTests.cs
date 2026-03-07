@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using StockTicker.Application.StockPrices;
 using StockTicker.Application.StockPrices.GetStockPrice;
+using StockTicker.Domain.StockPrices;
 
 namespace StockTicker.Application.UnitTests.StockPrices
 {
@@ -20,25 +21,19 @@ namespace StockTicker.Application.UnitTests.StockPrices
         {
             var stockPriceId = Guid.NewGuid();
             var query = new GetStockPriceQuery(stockPriceId);
-            var expectedResponse = new StockPriceResponse
-            {
-                Id = stockPriceId,
-                Symbol = "AAPL",
-                Price = 150.25m,
-                CreatedAtUtc = DateTime.UtcNow
-            };
+            var expectedStockPrice = StockPriceData.Create();
 
             _repositoryMock
                 .GetByIdAsync(stockPriceId, Arg.Any<CancellationToken>())
-                .Returns(expectedResponse);
+                .Returns(expectedStockPrice);
 
             var result = await _handler.Handle(query, CancellationToken.None);
 
             Assert.True(result.IsSuccess);
-            Assert.Equal(expectedResponse.Id, result.Value.Id);
-            Assert.Equal(expectedResponse.Symbol, result.Value.Symbol);
-            Assert.Equal(expectedResponse.Price, result.Value.Price);
-            Assert.Equal(expectedResponse.CreatedAtUtc, result.Value.CreatedAtUtc);
+            Assert.Equal(expectedStockPrice.Id, result.Value.Id);
+            Assert.Equal(expectedStockPrice.Ticker, result.Value.Ticker);
+            Assert.Equal(expectedStockPrice.Price, result.Value.Price);
+            Assert.Equal(expectedStockPrice.Timestamp, result.Value.Timestamp);
         }
     }
 }
