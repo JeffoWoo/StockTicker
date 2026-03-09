@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StockTicker.Application\StockTicker.Application.csproj" />
+    <ProjectReference Include="..\StockTicker.Infrastructure\StockTicker.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -2,13 +2,13 @@
 using StockTicker.Application.Abstractions.Data;
 using StockTicker.Domain.StockPrices;
 
-namespace StockTicker.Application.StockPrices
+namespace StockTicker.Infrastructure.Repositories
 {
-    internal sealed class DapperStockPriceRepository : IStockPriceQueryRepository
+    internal sealed class StockPriceRepository : IStockPriceRepository
     {
         private readonly ISqlConnectionFactory _sqlConnectionFactory;
 
-        public DapperStockPriceRepository(ISqlConnectionFactory sqlConnectionFactory) =>
+        public StockPriceRepository(ISqlConnectionFactory sqlConnectionFactory) =>
             _sqlConnectionFactory = sqlConnectionFactory;
 
         public async Task<StockPrice?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
@@ -28,6 +28,11 @@ namespace StockTicker.Application.StockPrices
             return await connection.QueryFirstOrDefaultAsync<StockPrice>(
                 sql,
                 new { StockPriceId = id });
+        }
+
+        public void Add(StockPrice stockPrice)
+        {
+            throw new NotImplementedException();
         }
     }
 }

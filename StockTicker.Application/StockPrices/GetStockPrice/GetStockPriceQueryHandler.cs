@@ -6,9 +6,9 @@ namespace StockTicker.Application.StockPrices.GetStockPrice
 {
     internal sealed class GetStockPriceQueryHandler : IQueryHandler<GetStockPriceQuery, StockPrice>
     {
-        private readonly IStockPriceQueryRepository _repository;
+        private readonly IStockPriceRepository _repository;
 
-        public GetStockPriceQueryHandler(IStockPriceQueryRepository repository)
+        public GetStockPriceQueryHandler(IStockPriceRepository repository)
         {
             _repository = repository;
         }

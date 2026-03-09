@@ -2,6 +2,7 @@
   <Folder Name="/src/">
     <Project Path="StockTicker.Application/StockTicker.Application.csproj" Id="93d270c3-67fa-4f6f-8a63-3e0794456e89" />
     <Project Path="StockTicker.Domain/StockTicker.Domain.csproj" Id="53731306-2a7e-49d8-b187-b0db867dda48" />
+    <Project Path="StockTicker.Infrastructure/StockTicker.Infrastructure.csproj" Id="6c53c29a-a72e-4c90-ba84-3ac8b841b4b3" />
   </Folder>
   <Folder Name="/test/">
     <Project Path="StockTicker.Application.UnitTests/StockTicker.Application.UnitTests.csproj" Id="99f73b57-67d3-4389-a3f6-de541f2a8a86" />

@@ -1,4 +1,5 @@
-﻿using NSubstitute;
+﻿using FluentAssertions;
+using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using StockTicker.Application.Abstractions.Clock;
 using StockTicker.Application.Exceptions;
@@ -16,14 +17,14 @@ namespace StockTicker.Application.UnitTests.StockPrices
             150.25m,
             UtcNow);
 
-        private readonly CreateStockPriceCommandHandler _handler;
-        private readonly IStockPriceWriteRepository _stockPriceRepositoryMock;
+        private CreateStockPriceCommandHandler _handler;
+        private readonly IStockPriceRepository _stockPriceRepositoryMock;
         private readonly IUnitOfWork _unitOfWorkMock;
         private readonly IDateTimeProvider _dateTimeProviderMock;
 
         public CreateStockPriceTests()
         {
-            _stockPriceRepositoryMock = Substitute.For<IStockPriceWriteRepository>();
+            _stockPriceRepositoryMock = Substitute.For<IStockPriceRepository>();
             _unitOfWorkMock = Substitute.For<IUnitOfWork>();
             _dateTimeProviderMock = Substitute.For<IDateTimeProvider>();
             _dateTimeProviderMock.UtcNow.Returns(UtcNow);
@@ -33,12 +34,12 @@ namespace StockTicker.Application.UnitTests.StockPrices
         public async Task Handle_ShouldCreateStockPrice()
         {
             // Arrange
-            var handler = new CreateStockPriceCommandHandler(
+            _handler = new CreateStockPriceCommandHandler(
                 _stockPriceRepositoryMock,
                 _unitOfWorkMock);
 
             // Act
-            var result = await handler.Handle(Command, CancellationToken.None);
+            var result = await _handler.Handle(Command, CancellationToken.None);
 
             // Assert
             Assert.True(result.IsSuccess);
@@ -53,18 +54,18 @@ namespace StockTicker.Application.UnitTests.StockPrices
         public async Task Handle_Should_ReturnFailure_WhenUnitOfWorkThrows()
         {
             // Arrange
-            var handler = new CreateStockPriceCommandHandler(
+            _handler = new CreateStockPriceCommandHandler(
                 _stockPriceRepositoryMock,
                 _unitOfWorkMock);
                 _unitOfWorkMock.SaveChangesAsync(Arg.Any<CancellationToken>())
                 .ThrowsAsync(new ConcurrencyException("Concurrency", new Exception()));
 
             // Act
-            var result = await handler.Handle(Command, CancellationToken.None);
+            var result = await _handler.Handle(Command, CancellationToken.None);
 
             // Assert
-            Assert.True(result.IsFailure);
-            Assert.Equal(StockPriceErrors.Concurrency, result.Error);
+            result.IsFailure.Should().BeTrue();
+            result.Error.Should().Be(StockPriceErrors.Concurrency);
         }
     }
 }
