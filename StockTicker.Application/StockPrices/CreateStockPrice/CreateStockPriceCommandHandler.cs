@@ -1,5 +1,6 @@
 ﻿using StockTicker.Application.Abstractions.Messaging;
 using StockTicker.Application.Exceptions;
+using StockTicker.Application.Repostitories;
 using StockTicker.Domain.Abstractions;
 using StockTicker.Domain.StockPrices;
 
@@ -23,8 +24,8 @@ namespace StockTicker.Application.StockPrices.CreateStockPrice
             try
             {
                 var stockPrice = StockPrice.Create(
-                    request.Ticker,
-                    request.Price,
+                    new Ticker(request.Ticker),
+                    new Price(request.Price),
                     request.Timestamp);
 
                 _stockPriceRepository.Add(stockPrice.Value);

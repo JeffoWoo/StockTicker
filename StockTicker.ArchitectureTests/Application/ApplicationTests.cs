@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using FluentValidation;
 using NetArchTest.Rules;
 using StockTicker.Application.Abstractions.Messaging;
 using StockTicker.ArchitectureTests.Infrastructure;
@@ -54,6 +55,31 @@ namespace StockTicker.ArchitectureTests.Application
             var result = Types.InAssembly(ApplicationAssembly)
                 .That()
                 .ImplementInterface(typeof(IQueryHandler<,>))
+                .Should()
+                .NotBePublic()
+                .GetResult();
+
+            result.IsSuccessful.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Validator_ShouldHave_NameEndingWith_Validator()
+        {
+            var result = Types.InAssembly(ApplicationAssembly)
+                .That()
+                .ImplementInterface(typeof(IValidator<>))
+                .Should().HaveNameEndingWith("Validator")
+                .GetResult();
+
+            result.IsSuccessful.Should().BeTrue();
+        }
+
+        [Fact]
+        public void Validator_Should_NotBePublic()
+        {
+            var result = Types.InAssembly(ApplicationAssembly)
+                .That()
+                .ImplementInterface(typeof(IValidator<>))
                 .Should()
                 .NotBePublic()
                 .GetResult();

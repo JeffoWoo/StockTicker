@@ -17,8 +17,8 @@ namespace StockTicker.Application.StockPrices.CreateStockPrice
         {
             var payload = new StockPriceCreatedNotification(
                 notification.StockPriceId,
-                notification.Symbol,
-                notification.Price,
+                notification.Ticker.Value,
+                notification.Price.Value,
                 notification.CreatedAtUtc);
 
             await _stockPriceRealtimeNotifier.StockPriceCreatedAsync(payload, cancellationToken);

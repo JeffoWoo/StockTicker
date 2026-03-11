@@ -1,5 +1,6 @@
 ﻿using StockTicker.Application.Abstractions.Authentication;
 using StockTicker.Application.Abstractions.Messaging;
+using StockTicker.Application.Repostitories;
 using StockTicker.Domain.Abstractions;
 using StockTicker.Domain.Users;
 

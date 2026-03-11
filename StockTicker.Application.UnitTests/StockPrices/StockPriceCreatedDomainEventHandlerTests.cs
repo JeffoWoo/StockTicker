@@ -1,6 +1,7 @@
 ﻿using NSubstitute;
 using StockTicker.Application.Abstractions.Realtime.StockPrices;
 using StockTicker.Application.StockPrices.CreateStockPrice;
+using StockTicker.Domain.StockPrices;
 using StockTicker.Domain.StockPrices.Events;
 
 namespace StockTicker.Application.UnitTests.StockPrices
@@ -23,8 +24,8 @@ namespace StockTicker.Application.UnitTests.StockPrices
             // Arrange
             var domainEvent = new StockPriceCreatedDomainEvent(
                 Guid.NewGuid(),
-                "AAPL",
-                150.25m,
+                new Ticker("AAPL"),
+                new Price(50.25m),
                 DateTime.UtcNow);
 
             // Act
@@ -34,8 +35,8 @@ namespace StockTicker.Application.UnitTests.StockPrices
             await _stockPriceRealtimeNotifierMock.Received(1).StockPriceCreatedAsync(
                 Arg.Is<StockPriceCreatedNotification>(n =>
                     n.StockPriceId == domainEvent.StockPriceId &&
-                    n.Symbol == domainEvent.Symbol &&
-                    n.Price == domainEvent.Price &&
+                    n.Symbol == domainEvent.Ticker.Value &&
+                    n.Price == domainEvent.Price.Value &&
                     n.CreatedAtUtc == domainEvent.CreatedAtUtc),
                 CancellationToken.None);
         }

@@ -3,6 +3,7 @@ using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using StockTicker.Application.Abstractions.Authentication;
 using StockTicker.Application.Exceptions;
+using StockTicker.Application.Repostitories;
 using StockTicker.Application.Users.RegisterUser;
 using StockTicker.Domain.Abstractions;
 using StockTicker.Domain.Users;

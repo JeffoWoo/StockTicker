@@ -4,8 +4,8 @@ namespace StockTicker.Domain.StockPrices.Events
 {
     public sealed record StockPriceCreatedDomainEvent(
         Guid StockPriceId, 
-        string Symbol, 
-        decimal Price, 
+        Ticker Ticker, 
+        Price Price, 
         DateTime CreatedAtUtc) : IDomainEvent
     {
     }

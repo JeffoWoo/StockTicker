@@ -3,6 +3,7 @@ using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using StockTicker.Application.Abstractions.Clock;
 using StockTicker.Application.Exceptions;
+using StockTicker.Application.Repostitories;
 using StockTicker.Application.StockPrices.CreateStockPrice;
 using StockTicker.Domain.Abstractions;
 using StockTicker.Domain.StockPrices;
@@ -44,8 +45,8 @@ namespace StockTicker.Application.UnitTests.StockPrices
             // Assert
             Assert.True(result.IsSuccess);
             _stockPriceRepositoryMock.Received(1).Add(Arg.Is<StockPrice>(sp =>
-                sp.Ticker == Command.Ticker &&
-                sp.Price == Command.Price &&
+                sp.Ticker.Value == Command.Ticker &&
+                sp.Price.Value == Command.Price &&
                 sp.Timestamp == Command.Timestamp));
             await _unitOfWorkMock.Received(1).SaveChangesAsync(CancellationToken.None);
         }

@@ -1,4 +1,5 @@
-﻿using StockTicker.Domain.StockPrices;
+﻿using StockTicker.Application.StockPrices.GetStockPrice;
+using StockTicker.Domain.StockPrices;
 
 namespace StockTicker.Application.UnitTests.StockPrices
 {
@@ -8,14 +9,23 @@ namespace StockTicker.Application.UnitTests.StockPrices
         public static decimal Price = 123.45m;
         public static DateTime Timestamp = DateTime.UtcNow;
 
-        public static StockPrice Create()
+        public static StockPriceResponse Create()
         {
-            return StockPrice.Create(StockPriceData.Ticker, StockPriceData.Price, StockPriceData.Timestamp).Value;
+            return new StockPriceResponse
+            {
+                Id = Guid.NewGuid(),
+                Ticker = Ticker,
+                Price = Price,
+                Timestamp = Timestamp
+            };
         }
 
         public static StockPrice Create(DateTime timeStamp)
         {
-            return StockPrice.Create(StockPriceData.Ticker, StockPriceData.Price, timeStamp).Value;
+            return StockPrice.Create(
+                new Ticker(Ticker), 
+                new Price(Price), 
+                timeStamp).Value;
         }
     }
 }

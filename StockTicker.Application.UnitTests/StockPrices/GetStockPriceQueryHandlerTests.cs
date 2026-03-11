@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using NSubstitute;
+using StockTicker.Application.Repostitories;
 using StockTicker.Application.StockPrices.GetStockPrice;
-using StockTicker.Domain.StockPrices;
 
 namespace StockTicker.Application.UnitTests.StockPrices
 {
